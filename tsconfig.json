@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "ES2020", // The version of JavaScript to compile to
+		"module": "ES6", // Use ES6 module syntax
+		"outDir": "./dist", // Output folder for compiled JS
+		"rootDir": "./src", // Input folder for TypeScript files
+		"strict": true, // Enable all strict type-checking options
+		"esModuleInterop": true, // Allow for interop with CommonJS modules
+		"moduleResolution": "node", // Resolve modules in the node manner
+		"skipLibCheck": true, // Skip type checking for declaration files
+		"sourceMap": true
+	},
+	"include": [
+		"src/**/*.ts" // Specify the folder for TypeScript files
+	],
+	"exclude": [
+		"node_modules" // Exclude the node_modules folder
+	]
+}
