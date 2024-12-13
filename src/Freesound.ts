@@ -1,6 +1,7 @@
-import FreesoundQueryBuilder from "./FreesoundQueryBuilder.js";
+import { FreesoundResponse } from "./FreesoundResponse.js";
+import QueryBuilder from "./QueryBuilder.js";
 
-export default class FreesoundApi {
+export default class Freesound {
     readonly URL: string = "https://freesound.org/apiv2";
     readonly APIKey: string;
 
@@ -8,14 +9,13 @@ export default class FreesoundApi {
         this.APIKey = APIKey;
     }
 
-    text = async (builder: FreesoundQueryBuilder): Promise<any> => {
+    searchText = async (builder: QueryBuilder): Promise<FreesoundResponse> => {
         const queryURL = builder.build(this.APIKey);
         const response = await fetch(`${this.URL}/search/text/?${queryURL}`);
         if (response.ok) {
             return response.json();
         } else {
-            console.error(await response.text());
-            return null;
+            throw new Error(await response.text());
         }
     }
 }
