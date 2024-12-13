@@ -7,6 +7,6 @@ export default defineConfig({
         lib: {
             entry: 'src/Index.ts', 
             name: 'freesound-api'
-        },
+        }
     },
 });
