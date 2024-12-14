@@ -2,13 +2,13 @@
  * A builder class for constructing Freesound API search requests with various filters.
  */
 export default class QueryBuilder {
-    private readonly query: string[] = [];
-    private readonly fields: string[] = [];
-    private readonly filter: string[] = [];
-    private page: number = 1;
-    private pageSize: number = 15;
-    private descriptors: string[] = [];
-    private normalized: boolean = false;
+    public readonly query: string[] = [];
+    public readonly fields: string[] = [];
+    public readonly filter: string[] = [];
+    public page: number = 1;
+    public pageSize: number = 15;
+    public descriptors: string[] = [];
+    public normalized: boolean = false;
 
     /**
      * Adds a search query to the request.
@@ -25,7 +25,7 @@ export default class QueryBuilder {
      * @param {string} value - The field name to include.
      * @returns {QueryBuilder} The current instance for chaining.
      */
-    withField(value: string): this {
+    includeField(value: string): this {
         this.fields.push(encodeURIComponent(value));
         return this;
     }

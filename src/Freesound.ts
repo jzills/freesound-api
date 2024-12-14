@@ -18,4 +18,14 @@ export default class Freesound {
             throw new Error(await response.text());
         }
     }
+
+    // sound = async (id: string) => {
+    //     const response = await fetch(`${this.URL}/apiv2/sounds/${id}/`);
+    //     if (response.ok) {
+    //         return response.json();
+    //     } else {
+    //         console.error("Oops");
+    //         return [];
+    //     }
+    // }
 }
