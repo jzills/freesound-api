@@ -1,5 +1,5 @@
 import { FreesoundResponse } from "./FreesoundResponse.js";
-import QueryBuilder from "./QueryBuilder.js";
+import QueryBuilder from "./builders/QueryBuilder.js";
 
 export default class Freesound {
     readonly URL: string = "https://freesound.org/apiv2";

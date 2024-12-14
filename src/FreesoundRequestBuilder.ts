@@ -1,7 +1,7 @@
-import AudioCommonsFilterQueryBuilder from "./AudioCommonsFilterQueryBuilder";
-import DefaultFilterQueryBuilder from "./DefaultFilterQueryBuilder";
-import FieldQueryBuilder from "./FieldQueryBuilder";
-import QueryBuilder from "./QueryBuilder";
+import AudioCommonsFilterQueryBuilder from "./builders/AudioCommonsFilterQueryBuilder";
+import DefaultFilterQueryBuilder from "./builders/DefaultFilterQueryBuilder";
+import FieldQueryBuilder from "./builders/FieldQueryBuilder";
+import QueryBuilder from "./builders/QueryBuilder";
 
 export type Constructor<T = {}> = new (...args: any[]) => T;
 

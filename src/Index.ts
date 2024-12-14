@@ -1,9 +1,9 @@
 import Freesound from "./Freesound";
-import QueryBuilder from "./QueryBuilder";
-import AudioCommonsFilterQueryBuilder from "./AudioCommonsFilterQueryBuilder";
-import DefaultFilterQueryBuilder from "./DefaultFilterQueryBuilder";
+import QueryBuilder from "./builders/QueryBuilder";
+import AudioCommonsFilterQueryBuilder from "./builders/AudioCommonsFilterQueryBuilder";
+import DefaultFilterQueryBuilder from "./builders/DefaultFilterQueryBuilder";
 import FreesoundRequestBuilder from "./FreesoundRequestBuilder";
-import FieldQueryBuilder from "./FieldQueryBuilder";
+import FieldQueryBuilder from "./builders/FieldQueryBuilder";
 
 export {
     Freesound,

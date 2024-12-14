@@ -1,4 +1,4 @@
-import { Constructor } from "./FreesoundRequestBuilder";
+import { Constructor } from "../FreesoundRequestBuilder";
 import QueryBuilder from "./QueryBuilder";
 
 export default function FieldQueryBuilder<T extends Constructor<QueryBuilder>>(Base: T) {
