@@ -1,7 +1,35 @@
 import { Constructor } from "../FreesoundRequestBuilder";
 import QueryBuilder from "./QueryBuilder";
 
-export default function DefaultFilterQueryBuilder<T extends Constructor<QueryBuilder>>(Base: T) {
+export interface IDefaultFilterQueryBuilder {
+    withId(value: number): this;
+    withUsername(value: string): this;
+    withCreated(value: string): this;
+    withOriginalFilename(value: string): this;
+    withDescription(value: string): this;
+    withTag(value: string): this;
+    withLicense(value: "Attribution" | "Attribution NonCommercial" | "Creative Commons 0"): this;
+    withIsRemix(value: boolean): this;
+    withWasRemixed(value: boolean): this;
+    withPack(value: string): this;
+    withPackTokenized(value: string): this;
+    withIsGeotagged(value: boolean): this;
+    withType(value: "wav" | "aiff" | "ogg" | "mp3" | "m4a" | "flac"): this;
+    withDuration(value: number): this;
+    withBitDepth(value: number): this;
+    withBitrate(value: number): this;
+    withSampleRate(value: number): this;
+    withFileSize(value: number): this;
+    withChannels(value: number): this;
+    withMd5(value: string): this;
+    withNumDownloads(value: number): this;
+    withAvgRating(value: number): this;
+    withNumRatings(value: number): this;
+    withComment(value: string): this;
+    withNumComments(value: number): this;
+}
+
+export default function DefaultFilterQueryBuilder<T extends Constructor<QueryBuilder>>(Base: T): T & Constructor<IDefaultFilterQueryBuilder> {
     return class extends Base {
         /**
          * Filters sounds by their unique Freesound ID.

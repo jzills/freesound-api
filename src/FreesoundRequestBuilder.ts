@@ -6,8 +6,8 @@ import QueryBuilder from "./builders/QueryBuilder";
 export type Constructor<T = {}> = new (...args: any[]) => T;
 
 export default class FreesoundRequestBuilder extends
-    DefaultFilterQueryBuilder(
-        AudioCommonsFilterQueryBuilder(
+    AudioCommonsFilterQueryBuilder(
+        DefaultFilterQueryBuilder(
             FieldQueryBuilder(QueryBuilder)))
 {
 }

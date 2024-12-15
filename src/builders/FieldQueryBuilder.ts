@@ -1,7 +1,43 @@
 import { Constructor } from "../FreesoundRequestBuilder";
 import QueryBuilder from "./QueryBuilder";
 
-export default function FieldQueryBuilder<T extends Constructor<QueryBuilder>>(Base: T) {
+export interface IFieldQueryBuilder {
+    includeId(): this;
+    includeUrl(): this;
+    includeName(): this;
+    includeTags(): this;
+    includeDescription(): this;
+    includeGeotag(): this;
+    includeCreated(): this;
+    includeLicense(): this;
+    includeType(): this;
+    includeChannels(): this;
+    includeFilesize(): this;
+    includeBitrate(): this;
+    includeBitdepth(): this;
+    includeDuration(): this;
+    includeSamplerate(): this;
+    includeUsername(): this;
+    includePack(): this;
+    includeDownload(): this;
+    includeBookmark(): this;
+    includePreviews(): this;
+    includeImages(): this;
+    includeNumDownloads(): this;
+    includeAvgRating(): this;
+    includeNumRatings(): this;
+    includeRate(): this;
+    includeComments(): this;
+    includeNumComments(): this;
+    includeComment(): this;
+    includeSimilarSounds(): this;
+    includeAnalysis(): this;
+    includeAnalysisStats(): this;
+    includeAnalysisFrames(): this;
+    includeAcAnalysis(): this;
+}
+
+export default function FieldQueryBuilder<T extends Constructor<QueryBuilder>>(Base: T): T & Constructor<IFieldQueryBuilder> {
     return class extends Base {
         /**
          * Include the "id" field in the fields list.

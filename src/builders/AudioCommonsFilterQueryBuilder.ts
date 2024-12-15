@@ -1,7 +1,32 @@
 import { Constructor } from "../FreesoundRequestBuilder";
 import QueryBuilder from "./QueryBuilder"
 
-export default function AudioCommonsFilterQueryBuilder<T extends Constructor<QueryBuilder>>(Base: T) {
+export interface IAudioCommonsFilterQueryBuilder {
+    withLoudness(value: number): this;
+    withDynamicRange(value: number): this;
+    withTemporalCentroid(value: number): this;
+    withLogAttackTime(value: number): this;
+    withSingleEvent(value: boolean): this;
+    withTonality(value: string): this;
+    withTonalityConfidence(value: number): this;
+    withLoop(value: boolean): this;
+    withTempo(value: number): this;
+    withTempoConfidence(value: number): this;
+    withNoteMidi(value: number): this;
+    withNoteName(value: string): this;
+    withNoteFrequency(value: number): this;
+    withNoteConfidence(value: number): this;
+    withBrightness(value: number): this;
+    withDepth(value: number): this;
+    withHardness(value: number): this;
+    withRoughness(value: number): this;
+    withBoominess(value: number): this;
+    withWarmth(value: number): this;
+    withSharpness(value: number): this;
+    withReverb(value: boolean): this;
+}
+
+const AudioCommonsFilterQueryBuilder = <T extends Constructor<QueryBuilder>>(Base: T): T & Constructor<IAudioCommonsFilterQueryBuilder> => {
     return class extends Base {
         /**
          * Filters sounds by their integrated loudness (LUFS) measured using the EBU R128 standard.
@@ -202,3 +227,5 @@ export default function AudioCommonsFilterQueryBuilder<T extends Constructor<Que
         }
     }
 }
+
+export default AudioCommonsFilterQueryBuilder;
