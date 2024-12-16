@@ -92,7 +92,7 @@ export default class QueryBuilder {
         const params: Record<string, string | number | boolean> = {
             query: this.query.join("&"),
             fields: this.fields.join(","),
-            filter: this.filter.join("&"),
+            filter: this.filter.join(" "),
             page: this.page,
             page_size: this.pageSize,
             descriptors: this.descriptors.join(","),

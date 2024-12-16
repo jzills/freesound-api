@@ -7,9 +7,12 @@ config({ path: path.resolve(__dirname, "../../.env") });
 async function sample() {
     const fs = new Freesound(process.env.VITE_API_KEY as string);
     const response = await fs.searchText(new FreesoundRequestBuilder()
-        .withQuery("Piano")
-        .includeAcAnalysis()
-        .includeBitrate()
+        .withQuery("drums")
+        .withPageSize(1)
+        .includeField("username")
+        .includePreviews()
+        .withLoop(true)
+        .withDuration(10)
     );
 
     console.log(response);

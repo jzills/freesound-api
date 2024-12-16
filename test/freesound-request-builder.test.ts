@@ -10,6 +10,9 @@ test("Test_Single_Query_And_Field_With_PageSize_1", async () => {
         .withQuery("drums")
         .withPageSize(1)
         .includeField("username")
+        .includePreviews()
+        .withLoop(true)
+        .withDuration(10)
     );
 
     // Assert
