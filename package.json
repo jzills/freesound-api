@@ -1,6 +1,6 @@
 {
 	"name": "freesound-api",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"main": "./dist/freesound-api.js",
 	"types": "./dist/freesound-api.d.ts",
 	"type": "module",
@@ -26,12 +26,7 @@
 		"@types/node": "^22.10.2",
 		"vite": "^6.0.3",
 		"vite-plugin-dts": "^4.3.0",
-		"vite-tsconfig-paths": "^5.1.4"
-	},
-	"dependencies": {
-		"@rollup/plugin-typescript": "^12.1.1",
-		"dotenv": "^16.4.7",
-		"tslib": "^2.8.1",
+		"vite-tsconfig-paths": "^5.1.4",
 		"vitest": "^2.1.8"
 	}
 }

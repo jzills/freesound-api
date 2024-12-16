@@ -11,7 +11,7 @@ export default defineConfig({
     ],
     build: {
         lib: {
-            entry: path.resolve(__dirname, "src/Index.ts"),
+            entry: path.resolve(__dirname, "src/index.ts"),
             name: "FreesoundApi", // Library name in UMD builds
             fileName: "freesound-api", // Output file name without extension
         },

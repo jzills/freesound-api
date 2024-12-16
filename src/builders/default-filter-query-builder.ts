@@ -1,5 +1,5 @@
-import { Constructor } from "../FreesoundRequestBuilder";
-import QueryBuilder from "./QueryBuilder";
+import { Constructor } from "../freesound-request-builder";
+import QueryBuilder from "./query-builder";
 
 export interface IDefaultFilterQueryBuilder {
     withId(value: number): this;

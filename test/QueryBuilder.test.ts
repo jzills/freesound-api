@@ -1,9 +1,9 @@
 import { assert, test } from "vitest";
 
-import FreesoundApi from "../src/Freesound.js";
-import QueryBuilder from "../src/QueryBuilder.js";
+import QueryBuilder from "../src/builders/QueryBuilder.js";
+import Freesound from "../src/Freesound.js";
 
-const client = new FreesoundApi(process.env.VITE_API_KEY!);
+const client = new Freesound(process.env.VITE_API_KEY!);
 
 test("Test_Single_Query_And_Field_With_PageSize_1", async () => {
     const { results } = await client.searchText(new QueryBuilder()

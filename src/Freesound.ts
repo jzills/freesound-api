@@ -1,5 +1,5 @@
-import { FreesoundResponse } from "./FreesoundResponse.js";
-import QueryBuilder from "./builders/QueryBuilder.js";
+import { FreesoundResponse } from "./freesound-response.js";
+import QueryBuilder from "./builders/query-builder.js";
 
 export default class Freesound {
     readonly URL: string = "https://freesound.org/apiv2";
@@ -18,14 +18,4 @@ export default class Freesound {
             throw new Error(await response.text());
         }
     }
-
-    // sound = async (id: string) => {
-    //     const response = await fetch(`${this.URL}/apiv2/sounds/${id}/`);
-    //     if (response.ok) {
-    //         return response.json();
-    //     } else {
-    //         console.error("Oops");
-    //         return [];
-    //     }
-    // }
 }
