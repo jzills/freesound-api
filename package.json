@@ -1,6 +1,7 @@
 {
 	"name": "freesound-api",
 	"version": "1.0.2",
+	"keywords": ["api", "audio", "fluent", "freesound", "freesound.org"],
 	"main": "./dist/freesound-api.js",
 	"types": "./dist/freesound-api.d.ts",
 	"type": "module",
