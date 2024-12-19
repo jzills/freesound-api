@@ -12,7 +12,7 @@
   "description": "",
   "dependencies": {
     "dotenv": "^16.4.7",
-    "freesound-api": "file:../freesound-api-1.0.3.tgz"
+    "freesound-api": "file:../freesound-api-1.0.4.tgz"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

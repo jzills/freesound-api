@@ -1,227 +1,273 @@
 import { Constructor } from "../freesound-request-builder";
-import QueryBuilder from "./query-builder"
+import QueryBuilder from "./query-builder";
 
+/**
+ * Interface for filtering audio commons query parameters.
+ */
 export interface IAudioCommonsFilterQueryBuilder {
+    /**
+     * Filters sounds by their integrated loudness (LUFS) measured using the EBU R128 standard.
+     * @param value - The loudness value.
+     * @returns {this} The current instance for chaining.
+     */
     withLoudness(value: number): this;
+
+    /**
+     * Filters sounds by their loudness range (dB, LU) measured using the EBU R128 standard.
+     * @param value - The dynamic range value.
+     * @returns {this} The current instance for chaining.
+     */
     withDynamicRange(value: number): this;
+
+    /**
+     * Filters sounds by their temporal centroid (sec.) of the audio signal.
+     * @param value - The temporal centroid value.
+     * @returns {this} The current instance for chaining.
+     */
     withTemporalCentroid(value: number): this;
+
+    /**
+     * Filters sounds by the log (base 10) of the attack time of a signal envelope.
+     * @param value - The log attack time value.
+     * @returns {this} The current instance for chaining.
+     */
     withLogAttackTime(value: number): this;
+
+    /**
+     * Filters sounds based on whether they contain one single audio event or more.
+     * @param value - `true` if the sound contains a single event, `false` otherwise.
+     * @returns {this} The current instance for chaining.
+     */
     withSingleEvent(value: boolean): this;
+
+    /**
+     * Filters sounds by their tonality (e.g., "C minor", "F# major").
+     * @param value - The tonality in the format "root_note scale".
+     * @returns {this} The current instance for chaining.
+     */
     withTonality(value: string): this;
+
+    /**
+     * Filters sounds by the confidence level of the tonality estimation.
+     * @param value - The confidence value between 0 and 1.
+     * @returns {this} The current instance for chaining.
+     */
     withTonalityConfidence(value: number): this;
+
+    /**
+     * Filters sounds based on whether they are loopable.
+     * @param value - `true` if the sound is loopable, `false` otherwise.
+     * @returns {this} The current instance for chaining.
+     */
     withLoop(value: boolean): this;
+
+    /**
+     * Filters sounds by their tempo (BPM) estimated by beat tracking algorithm.
+     * @param value - The BPM value.
+     * @returns {this} The current instance for chaining.
+     */
     withTempo(value: number): this;
+
+    /**
+     * Filters sounds by the confidence level of the tempo estimation.
+     * @param value - The confidence value between 0 and 1.
+     * @returns {this} The current instance for chaining.
+     */
     withTempoConfidence(value: number): this;
+
+    /**
+     * Filters sounds by the MIDI value corresponding to the estimated note.
+     * @param value - The MIDI value.
+     * @returns {this} The current instance for chaining.
+     */
     withNoteMidi(value: number): this;
+
+    /**
+     * Filters sounds by the pitch note name based on the median of the estimated fundamental frequency.
+     * @param value - The note name (e.g., "A4", "E#7").
+     * @returns {this} The current instance for chaining.
+     */
     withNoteName(value: string): this;
+
+    /**
+     * Filters sounds by the frequency corresponding to the estimated note.
+     * @param value - The frequency value in Hz.
+     * @returns {this} The current instance for chaining.
+     */
     withNoteFrequency(value: number): this;
+
+    /**
+     * Filters sounds by the confidence level of the note name/MIDI/frequency estimation.
+     * @param value - The confidence value between 0 and 1.
+     * @returns {this} The current instance for chaining.
+     */
     withNoteConfidence(value: number): this;
+
+    /**
+     * Filters sounds by their brightness on a scale from 0 to 100.
+     * @param value - The brightness value.
+     * @returns {this} The current instance for chaining.
+     */
     withBrightness(value: number): this;
+
+    /**
+     * Filters sounds by their depth on a scale from 0 to 100.
+     * @param value - The depth value.
+     * @returns {this} The current instance for chaining.
+     */
     withDepth(value: number): this;
+
+    /**
+     * Filters sounds by their hardness on a scale from 0 to 100.
+     * @param value - The hardness value.
+     * @returns {this} The current instance for chaining.
+     */
     withHardness(value: number): this;
+
+    /**
+     * Filters sounds by their roughness on a scale from 0 to 100.
+     * @param value - The roughness value.
+     * @returns {this} The current instance for chaining.
+     */
     withRoughness(value: number): this;
+
+    /**
+     * Filters sounds by their boominess on a scale from 0 to 100.
+     * @param value - The boominess value.
+     * @returns {this} The current instance for chaining.
+     */
     withBoominess(value: number): this;
+
+    /**
+     * Filters sounds by their warmth on a scale from 0 to 100.
+     * @param value - The warmth value.
+     * @returns {this} The current instance for chaining.
+     */
     withWarmth(value: number): this;
+
+    /**
+     * Filters sounds by their sharpness on a scale from 0 to 100.
+     * @param value - The sharpness value.
+     * @returns {this} The current instance for chaining.
+     */
     withSharpness(value: number): this;
+
+    /**
+     * Filters sounds based on whether the signal is reverberated.
+     * @param value - `true` if the sound has reverb, `false` otherwise.
+     * @returns {this} The current instance for chaining.
+     */
     withReverb(value: boolean): this;
 }
 
 const AudioCommonsFilterQueryBuilder = <T extends Constructor<QueryBuilder>>(Base: T): T & Constructor<IAudioCommonsFilterQueryBuilder> => {
     return class extends Base {
-        /**
-         * Filters sounds by their integrated loudness (LUFS) measured using the EBU R128 standard.
-         * @param {number} value - The loudness value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withLoudness(value: number): this {
             return this.withFilter("ac_loudness", value);
         }
 
-        /**
-         * Filters sounds by their loudness range (dB, LU) measured using the EBU R128 standard.
-         * @param {number} value - The dynamic range value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withDynamicRange(value: number): this {
             return this.withFilter("ac_dynamic_range", value);
         }
 
-        /**
-         * Filters sounds by their temporal centroid (sec.) of the audio signal.
-         * @param {number} value - The temporal centroid value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withTemporalCentroid(value: number): this {
             return this.withFilter("ac_temporal_centroid", value);
         }
 
-        /**
-         * Filters sounds by the log (base 10) of the attack time of a signal envelope.
-         * @param {number} value - The log attack time value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withLogAttackTime(value: number): this {
             return this.withFilter("ac_log_attack_time", value);
         }
 
-        /**
-         * Filters sounds based on whether they contain one single audio event or more.
-         * @param {boolean} value - `true` if the sound contains a single event, `false` otherwise.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withSingleEvent(value: boolean): this {
             return this.withFilter("ac_single_event", value);
         }
 
-        /**
-         * Filters sounds by their tonality (e.g., "C minor", "F# major").
-         * @param {string} value - The tonality in the format "root_note scale".
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withTonality(value: string): this {
             return this.withFilter("ac_tonality", value);
         }
 
-        /**
-         * Filters sounds by the confidence level of the tonality estimation.
-         * @param {number} value - The confidence value between 0 and 1.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withTonalityConfidence(value: number): this {
             return this.withFilter("ac_tonality_confidence", value);
         }
 
-        /**
-         * Filters sounds based on whether they are loopable.
-         * @param {boolean} value - `true` if the sound is loopable, `false` otherwise.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withLoop(value: boolean): this {
             return this.withFilter("ac_loop", value);
         }
 
-        /**
-         * Filters sounds by their tempo (BPM) estimated by beat tracking algorithm.
-         * @param {number} value - The BPM value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withTempo(value: number): this {
             return this.withFilter("ac_tempo", value);
         }
 
-        /**
-         * Filters sounds by the confidence level of the tempo estimation.
-         * @param {number} value - The confidence value between 0 and 1.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withTempoConfidence(value: number): this {
             return this.withFilter("ac_tempo_confidence", value);
         }
 
-        /**
-         * Filters sounds by the MIDI value corresponding to the estimated note.
-         * @param {number} value - The MIDI value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withNoteMidi(value: number): this {
             return this.withFilter("ac_note_midi", value);
         }
 
-        /**
-         * Filters sounds by the pitch note name based on the median of the estimated fundamental frequency.
-         * @param {string} value - The note name (e.g., "A4", "E#7").
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withNoteName(value: string): this {
             return this.withFilter("ac_note_name", value);
         }
 
-        /**
-         * Filters sounds by the frequency corresponding to the estimated note.
-         * @param {number} value - The frequency value in Hz.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withNoteFrequency(value: number): this {
             return this.withFilter("ac_note_frequency", value);
         }
 
-        /**
-         * Filters sounds by the confidence level of the note name/MIDI/frequency estimation.
-         * @param {number} value - The confidence value between 0 and 1.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withNoteConfidence(value: number): this {
             return this.withFilter("ac_note_confidence", value);
         }
 
-        /**
-         * Filters sounds by their brightness on a scale from 0 to 100.
-         * @param {number} value - The brightness value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withBrightness(value: number): this {
             return this.withFilter("ac_brightness", value);
         }
 
-        /**
-         * Filters sounds by their depth on a scale from 0 to 100.
-         * @param {number} value - The depth value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withDepth(value: number): this {
             return this.withFilter("ac_depth", value);
         }
 
-        /**
-         * Filters sounds by their hardness on a scale from 0 to 100.
-         * @param {number} value - The hardness value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withHardness(value: number): this {
             return this.withFilter("ac_hardness", value);
         }
 
-        /**
-         * Filters sounds by their roughness on a scale from 0 to 100.
-         * @param {number} value - The roughness value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withRoughness(value: number): this {
             return this.withFilter("ac_roughness", value);
         }
 
-        /**
-         * Filters sounds by their boominess on a scale from 0 to 100.
-         * @param {number} value - The boominess value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withBoominess(value: number): this {
             return this.withFilter("ac_boominess", value);
         }
 
-        /**
-         * Filters sounds by their warmth on a scale from 0 to 100.
-         * @param {number} value - The warmth value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withWarmth(value: number): this {
             return this.withFilter("ac_warmth", value);
         }
 
-        /**
-         * Filters sounds by their sharpness on a scale from 0 to 100.
-         * @param {number} value - The sharpness value.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withSharpness(value: number): this {
             return this.withFilter("ac_sharpness", value);
         }
 
-        /**
-         * Filters sounds based on whether the signal is reverberated.
-         * @param {boolean} value - `true` if the sound has reverb, `false` otherwise.
-         * @returns {AudioCommonsFilterQueryBuilder} The current instance for chaining.
-         */
+        /** @inheritdoc */
         withReverb(value: boolean): this {
             return this.withFilter("ac_reverb", value);
         }
