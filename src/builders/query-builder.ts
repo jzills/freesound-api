@@ -38,7 +38,7 @@ export default class QueryBuilder {
      */
     withFilter(name: string, value: number | string | boolean): this {
         const encodedValue = encodeURIComponent(value.toString());
-        this.filter.push(`${encodeURIComponent(name)}:${encodedValue}`);
+        this.filter.push(`${name}:\"${encodedValue}\"`);
         return this;
     }
 

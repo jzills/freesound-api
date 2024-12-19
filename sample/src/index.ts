@@ -13,6 +13,7 @@ async function sample() {
         .includePreviews()
         .withLoop(true)
         .withDuration(10)
+        .withTonality("C minor")
     );
 
     console.log(response);
