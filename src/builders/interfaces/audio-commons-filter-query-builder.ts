@@ -46,10 +46,11 @@ export interface IAudioCommonsFilterQueryBuilder {
 
     /**
      * Filters sounds by the confidence level of the tonality estimation.
-     * @param value - The confidence value between 0 and 1.
+     * @param value - The maximum confidence value between 0 and 1.
+     * @param value - The minimum confidence value between 0 and 1.
      * @returns {this} The current instance for chaining.
      */
-    withTonalityConfidence(value: number): this;
+    withTonalityConfidence(min: number, max: number): this;
 
     /**
      * Filters sounds based on whether they are loopable.
@@ -67,10 +68,11 @@ export interface IAudioCommonsFilterQueryBuilder {
 
     /**
      * Filters sounds by the confidence level of the tempo estimation.
-     * @param value - The confidence value between 0 and 1.
+     * @param min - The maximum confidence value between 0 and 1.
+     * @param min - The minimum confidence value between 0 and 1.
      * @returns {this} The current instance for chaining.
      */
-    withTempoConfidence(value: number): this;
+    withTempoConfidence(min: number, max: number): this;
 
     /**
      * Filters sounds by the MIDI value corresponding to the estimated note.
@@ -95,59 +97,67 @@ export interface IAudioCommonsFilterQueryBuilder {
 
     /**
      * Filters sounds by the confidence level of the note name/MIDI/frequency estimation.
-     * @param value - The confidence value between 0 and 1.
+     * @param min - The minimum confidence value between 0 and 1.
+     * @param min - The maximum confidence value between 0 and 1.
      * @returns {this} The current instance for chaining.
      */
-    withNoteConfidence(value: number): this;
+    withNoteConfidence(min: number, max: number): this;
 
     /**
      * Filters sounds by their brightness on a scale from 0 to 100.
-     * @param value - The brightness value.
+     * @param min - The minimum brightness value between 0 and 100.
+     * @param max - The maximum brightness value between 0 and 100.
      * @returns {this} The current instance for chaining.
      */
-    withBrightness(value: number): this;
+    withBrightness(min: number, max: number): this;
 
     /**
      * Filters sounds by their depth on a scale from 0 to 100.
-     * @param value - The depth value.
+     * @param min - The minimum depth value between 0 and 100.
+     * @param max - The maximum depth value between 0 and 100.
      * @returns {this} The current instance for chaining.
      */
-    withDepth(value: number): this;
+    withDepth(min: number, max: number): this;
 
     /**
      * Filters sounds by their hardness on a scale from 0 to 100.
-     * @param value - The hardness value.
+     * @param min - The minimum hardness value between 0 and 100.
+     * @param max - The maximum hardness value between 0 and 100.
      * @returns {this} The current instance for chaining.
      */
-    withHardness(value: number): this;
+    withHardness(min: number, max: number): this;
 
     /**
      * Filters sounds by their roughness on a scale from 0 to 100.
-     * @param value - The roughness value.
+     * @param min - The minimum roughness value between 0 and 100.
+     * @param max - The maximum roughness value between 0 and 100.
      * @returns {this} The current instance for chaining.
      */
-    withRoughness(value: number): this;
+    withRoughness(min: number, max: number): this;
 
     /**
      * Filters sounds by their boominess on a scale from 0 to 100.
-     * @param value - The boominess value.
+     * @param min - The minimum boominess value between 0 and 100.
+     * @param max - The maximum boominess value between 0 and 100.
      * @returns {this} The current instance for chaining.
      */
-    withBoominess(value: number): this;
+    withBoominess(min: number, max: number): this;
 
     /**
      * Filters sounds by their warmth on a scale from 0 to 100.
-     * @param value - The warmth value.
+     * @param min - The minimum warmth value between 0 and 100.
+     * @param max - The maximum warmth value between 0 and 100.
      * @returns {this} The current instance for chaining.
      */
-    withWarmth(value: number): this;
+    withWarmth(min: number, max: number): this;
 
     /**
      * Filters sounds by their sharpness on a scale from 0 to 100.
-     * @param value - The sharpness value.
+     * @param min - The minimum sharpness value between 0 and 100.
+     * @param max - The maximum sharpness value between 0 and 100.
      * @returns {this} The current instance for chaining.
      */
-    withSharpness(value: number): this;
+    withSharpness(min: number, max: number): this;
 
     /**
      * Filters sounds based on whether the signal is reverberated.

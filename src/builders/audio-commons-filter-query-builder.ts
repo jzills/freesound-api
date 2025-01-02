@@ -35,8 +35,8 @@ const AudioCommonsFilterQueryBuilder = <T extends Constructor<QueryBuilder>>(Bas
         }
 
         /** @inheritdoc */
-        withTonalityConfidence(value: number): this {
-            return this.withFilter("ac_tonality_confidence", value);
+        withTonalityConfidence(min: number, max: number = 1.0): this {
+            return this.withNumericRangeFilter("ac_tonality_confidence", min, max);
         }
 
         /** @inheritdoc */
@@ -50,8 +50,8 @@ const AudioCommonsFilterQueryBuilder = <T extends Constructor<QueryBuilder>>(Bas
         }
 
         /** @inheritdoc */
-        withTempoConfidence(value: number): this {
-            return this.withFilter("ac_tempo_confidence", value);
+        withTempoConfidence(min: number, max: number = 1.0): this {
+            return this.withNumericRangeFilter("ac_tempo_confidence", min, max);
         }
 
         /** @inheritdoc */
@@ -70,43 +70,43 @@ const AudioCommonsFilterQueryBuilder = <T extends Constructor<QueryBuilder>>(Bas
         }
 
         /** @inheritdoc */
-        withNoteConfidence(value: number): this {
-            return this.withFilter("ac_note_confidence", value);
+        withNoteConfidence(min: number, max: number = 1.0): this {
+            return this.withNumericRangeFilter("ac_note_confidence", min, max);
         }
 
         /** @inheritdoc */
-        withBrightness(value: number): this {
-            return this.withFilter("ac_brightness", value);
+        withBrightness(min: number, max: number = 100.0): this {
+            return this.withNumericRangeFilter("ac_brightness", min, max);
         }
 
         /** @inheritdoc */
-        withDepth(value: number): this {
-            return this.withFilter("ac_depth", value);
+        withDepth(min: number, max: number = 100.0): this {
+            return this.withNumericRangeFilter("ac_depth", min, max);
         }
 
         /** @inheritdoc */
-        withHardness(value: number): this {
-            return this.withFilter("ac_hardness", value);
+        withHardness(min: number, max: number = 100.0): this {
+            return this.withNumericRangeFilter("ac_hardness", min, max);
         }
 
         /** @inheritdoc */
-        withRoughness(value: number): this {
-            return this.withFilter("ac_roughness", value);
+        withRoughness(min: number, max: number = 100.0): this {
+            return this.withNumericRangeFilter("ac_roughness", min, max);
         }
 
         /** @inheritdoc */
-        withBoominess(value: number): this {
-            return this.withFilter("ac_boominess", value);
+        withBoominess(min: number, max: number = 100.0): this {
+            return this.withNumericRangeFilter("ac_boominess", min, max);
         }
 
         /** @inheritdoc */
-        withWarmth(value: number): this {
-            return this.withFilter("ac_warmth", value);
+        withWarmth(min: number, max: number = 100.0): this {
+            return this.withNumericRangeFilter("ac_warmth", min, max);
         }
 
         /** @inheritdoc */
-        withSharpness(value: number): this {
-            return this.withFilter("ac_sharpness", value);
+        withSharpness(min: number, max: number = 100.0): this {
+            return this.withNumericRangeFilter("ac_sharpness", min, max);
         }
 
         /** @inheritdoc */

@@ -42,6 +42,12 @@ export default class QueryBuilder {
         return this;
     }
 
+    withNumericRangeFilter(name: string, min: number, max: number): this {
+        const encodedValue = encodeURIComponent(`[${min} TO ${max}]`);
+        this.filter.push(`${name}:${encodedValue}`);
+        return this;
+    }
+
     /**
      * Sets the page number for pagination.
      * @param {number} page - The page number to return. Default is 1.
