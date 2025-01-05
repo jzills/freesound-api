@@ -1,3 +1,8 @@
+
+# Freesound-api
+
+[![NPM Version](https://img.shields.io/npm/v/freesound-api)](https://www.npmjs.com/package/freesound-api) [![NPM Downloads](https://img.shields.io/npm/d18m/freesound-api)](https://www.npmjs.com/package/freesound-api)
+
 ## Summary
 
 JavaScript and TypeScript clients for [Freesound](https://freesound.org/).
@@ -8,5 +13,5 @@ JavaScript and TypeScript clients for [Freesound](https://freesound.org/).
 
 ## Usage
 
-Documentation can be found [here](https://github.com/jzills/freesound-api/blob/main/README.md).
+Documentation can be found [here](https://github.com/jzills/freesound-api/blob/main/lib/src/README.md).
 

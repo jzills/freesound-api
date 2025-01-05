@@ -6,7 +6,7 @@
 - [Summary](#summary)
 - [Features](#features)
 - [Installation](#installation)
-- [Documentation](./src/README.md)
+- [Documentation](./lib/src/README.md)
 - [Resources](#resources)
 
 ## Summary
@@ -15,7 +15,7 @@ A simple and intuitive [Freesound](https://freesound.org/) client.
 
 ## Features
 
-- TODO
+- Flexible resource searching with fluent builder implementations, supporting a variety of filter criteria.
 
 ## Installation
 
