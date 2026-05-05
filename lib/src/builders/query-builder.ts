@@ -1,3 +1,16 @@
+export type SortOption =
+    | "score"
+    | "duration_desc"
+    | "duration_asc"
+    | "created_desc"
+    | "created_asc"
+    | "downloads_desc"
+    | "downloads_asc"
+    | "rating_desc"
+    | "rating_asc";
+
+export type SimilaritySpace = "laion_clap" | "freesound_classic";
+
 /**
  * A builder class for constructing Freesound API search requests with various filters.
  */
@@ -7,13 +20,15 @@ export default class QueryBuilder {
     private readonly filter: string[] = [];
     private page: number = 1;
     private pageSize: number = 15;
-    private descriptors: string[] = [];
-    private normalized: boolean = false;
+    private sort?: SortOption;
+    private groupByPack?: boolean;
+    private similarTo?: number | number[];
+    private similaritySpace?: SimilaritySpace;
+    private weights?: string;
 
     /**
-     * Adds a search query to the request.
-     * @param {string} value - The search term to query.
-     * @returns {QueryBuilder} The current instance for chaining.
+     * Adds a search query term to the request.
+     * @param value - The search term.
      */
     withQuery(value: string): this {
         this.query.push(encodeURIComponent(value));
@@ -22,8 +37,7 @@ export default class QueryBuilder {
 
     /**
      * Specifies which fields to include in the response.
-     * @param {string} value - The field name to include.
-     * @returns {QueryBuilder} The current instance for chaining.
+     * @param value - The field name to include.
      */
     includeField(value: string): this {
         this.fields.push(encodeURIComponent(value));
@@ -32,9 +46,8 @@ export default class QueryBuilder {
 
     /**
      * Adds a generic filter to the request.
-     * @param {string} name - The name of the filter.
-     * @param {number | string | boolean} value - The value of the filter.
-     * @returns {QueryBuilder} The current instance for chaining.
+     * @param name - The filter field name.
+     * @param value - The filter value.
      */
     withFilter(name: string, value: number | string | boolean): this {
         const encodedValue = encodeURIComponent(value.toString());
@@ -42,6 +55,12 @@ export default class QueryBuilder {
         return this;
     }
 
+    /**
+     * Adds a numeric range filter using Solr [min TO max] syntax.
+     * @param name - The filter field name.
+     * @param min - The minimum value.
+     * @param max - The maximum value.
+     */
     withNumericRangeFilter(name: string, min: number, max: number): this {
         const encodedValue = encodeURIComponent(`[${min} TO ${max}]`);
         this.filter.push(`${name}:${encodedValue}`);
@@ -50,8 +69,7 @@ export default class QueryBuilder {
 
     /**
      * Sets the page number for pagination.
-     * @param {number} page - The page number to return. Default is 1.
-     * @returns {QueryBuilder} The current instance for chaining.
+     * @param page - The page number. Default is 1.
      */
     withPage(page: number): this {
         this.page = page;
@@ -59,40 +77,63 @@ export default class QueryBuilder {
     }
 
     /**
-     * Sets the number of items per page in the result.
-     * @param {number} pageSize - The number of items per page to include. Default is 15, maximum is 150.
-     * @returns {QueryBuilder} The current instance for chaining.
+     * Sets the number of results per page.
+     * @param pageSize - Results per page. Default is 15, maximum is 150.
      */
     withPageSize(pageSize: number): this {
-        this.pageSize = Math.min(pageSize, 150); // Max page_size is 150
+        this.pageSize = Math.min(pageSize, 150);
         return this;
     }
 
     /**
-     * Specifies which sound content-based descriptors to include in the response.
-     * @param {string} value - The descriptor names to include.
-     * @returns {QueryBuilder} The current instance for chaining.
+     * Sets the sort order for results.
+     * @param value - The sort option.
      */
-    withDescriptors(value: string): this {
-        this.descriptors.push(encodeURIComponent(value));
+    withSort(value: SortOption): this {
+        this.sort = value;
         return this;
     }
 
     /**
-     * Specifies whether the descriptors should be normalized.
-     * @param {boolean} normalized - Whether to normalize the descriptors. Default is false (no normalization).
-     * @returns {QueryBuilder} The current instance for chaining.
+     * Collapses results so that only one sound per pack is returned.
+     * @param value - Whether to group by pack. Default is false.
      */
-    withNormalized(normalized: boolean): this {
-        this.normalized = normalized;
+    withGroupByPack(value: boolean): this {
+        this.groupByPack = value;
+        return this;
+    }
+
+    /**
+     * Finds sounds similar to the given sound ID(s).
+     * @param id - A single sound ID or an array of sound IDs.
+     */
+    withSimilarTo(id: number | number[]): this {
+        this.similarTo = id;
+        return this;
+    }
+
+    /**
+     * Sets the similarity algorithm used when finding similar sounds.
+     * @param space - "laion_clap" (semantic + acoustic) or "freesound_classic" (low-level audio features).
+     */
+    withSimilaritySpace(space: SimilaritySpace): this {
+        this.similaritySpace = space;
+        return this;
+    }
+
+    /**
+     * Sets custom field weights for scoring.
+     * @param value - The weights string as accepted by the Freesound API.
+     */
+    withWeights(value: string): this {
+        this.weights = value;
         return this;
     }
 
     /**
      * @internal
-     * Builds the final URL for the Freesound API request with all specified queries, fields, and filters.
-     * @param {string} APIKey - The API key to authenticate the request.
-     * @returns {string} The complete API request URL.
+     * Builds the final query string for the Freesound search API.
+     * @param APIKey - The API key to authenticate the request.
      */
     build(APIKey: string): string {
         const params: Record<string, string | number | boolean> = {
@@ -101,20 +142,33 @@ export default class QueryBuilder {
             filter: this.filter.join(" "),
             page: this.page,
             page_size: this.pageSize,
-            descriptors: this.descriptors.join(","),
-            normalized: this.normalized ? 1 : 0,
         };
-    
-        // Remove any keys that have empty values
+
+        if (this.sort !== undefined) {
+            params.sort = this.sort;
+        }
+        if (this.groupByPack !== undefined) {
+            params.group_by_pack = this.groupByPack ? 1 : 0;
+        }
+        if (this.similarTo !== undefined) {
+            params.similar_to = Array.isArray(this.similarTo)
+                ? this.similarTo.join(",")
+                : this.similarTo;
+        }
+        if (this.similaritySpace !== undefined) {
+            params.similarity_space = this.similaritySpace;
+        }
+        if (this.weights !== undefined) {
+            params.weights = this.weights;
+        }
+
         Object.keys(params).forEach((key) => {
-            if (!params[key]) {
+            if (!params[key] && params[key] !== 0) {
                 delete params[key];
             }
         });
-    
-        // Construct the query string
+
         const queryString = new URLSearchParams(params as Record<string, string>).toString();
-    
         return `${queryString}&token=${APIKey}`;
     }
 }
