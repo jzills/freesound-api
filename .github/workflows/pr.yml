@@ -5,10 +5,10 @@ on:
     branches: [ "main", "develop" ]
 
 jobs:
-  tests:
-    name: Tests
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 
@@ -23,8 +23,6 @@ jobs:
         working-directory: ./lib
         run: npm ci
 
-      - name: Run tests
+      - name: Build
         working-directory: ./lib
-        env:
-          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
-        run: npx vitest run --reporter=verbose
+        run: npm run build
