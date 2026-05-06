@@ -24,7 +24,7 @@
 		"dist"
 	],
 	"devDependencies": {
-		"@types/node": "^22.10.2",
+		"@types/node": "^25.6.0",
 		"vite": "^6.0.3",
 		"vite-plugin-dts": "^4.3.0",
 		"vite-tsconfig-paths": "^5.1.4",
