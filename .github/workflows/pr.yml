@@ -8,6 +8,7 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -26,4 +27,4 @@ jobs:
         working-directory: ./lib
         env:
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
-        run: npx vitest run
+        run: npx vitest run --reporter=verbose

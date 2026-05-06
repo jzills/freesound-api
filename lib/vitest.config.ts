@@ -6,10 +6,10 @@ export default defineConfig(({ mode }) => ({
     test: {
         env: loadEnv(mode, process.cwd(), ""),
         setupFiles: ["./test/setup.ts"],
-        pool: "forks",
+        pool: "threads",
         poolOptions: {
-            forks: {
-                singleFork: true,
+            threads: {
+                singleThread: true,
             },
         },
         testTimeout: 15000,
