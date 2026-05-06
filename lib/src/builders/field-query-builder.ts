@@ -149,24 +149,5 @@ export default function FieldQueryBuilder<T extends Constructor<QueryBuilder>>(B
             return this.includeField('similar_sounds');
         }
 
-        /** @inheritdoc */
-        includeAnalysis(): this {
-            return this.includeField('analysis');
-        }
-
-        /** @inheritdoc */
-        includeAnalysisStats(): this {
-            return this.includeField('analysis_stats');
-        }
-
-        /** @inheritdoc */
-        includeAnalysisFrames(): this {
-            return this.includeField('analysis_frames');
-        }
-
-        /** @inheritdoc */
-        includeAcAnalysis(): this {
-            return this.includeField('ac_analysis');
-        }
     }
 }

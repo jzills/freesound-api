@@ -11,7 +11,7 @@ async function sample() {
         .withPageSize(1)
         .includeField("username")
         .includePreviews()
-        .withLoop(true)
+        .withLoopable(true)
         .withDuration(10)
         .withTonality("C minor")
     );

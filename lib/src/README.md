@@ -10,7 +10,7 @@ Import the `Freesound` client and the `FreesoundRequestBuilder`.
     import { Freesound, FreesoundRequestBuilder } from "freesound-api";
 
 > [!NOTE]
-> The `FreesoundRequestBuilder` encapsulates multiple builder variations that can be used for querying, filtering and so on. The individual builders can be imported directly as well and used instead if only a subset of features are required. The other available builders are `AudioCommonsFilterQueryBuilder`, `DefaultFilterQueryBuilder`, `FieldQueryBuilder` and `QueryBuilder`.
+> The `FreesoundRequestBuilder` encapsulates multiple builder variations that can be used for querying, filtering and so on. The individual builders can be imported directly as well and used instead if only a subset of features are required. The other available builders are `SoundDescriptorFilterQueryBuilder`, `DefaultFilterQueryBuilder`, `FieldQueryBuilder` and `QueryBuilder`.
 
 Create a `Freesound` client instance.
 

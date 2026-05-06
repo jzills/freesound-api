@@ -20,11 +20,6 @@ export default function DefaultFilterQueryBuilder<T extends Constructor<QueryBui
         }
 
         /** @inheritdoc */
-        withOriginalFilename(value: string): this {
-            return this.withFilter("original_filename", value);
-        }
-
-        /** @inheritdoc */
         withDescription(value: string): this {
             return this.withFilter("description", value);
         }
@@ -52,11 +47,6 @@ export default function DefaultFilterQueryBuilder<T extends Constructor<QueryBui
         /** @inheritdoc */
         withPack(value: string): this {
             return this.withFilter("pack", value);
-        }
-
-        /** @inheritdoc */
-        withPackTokenized(value: string): this {
-            return this.withFilter("pack_tokenized", value);
         }
 
         /** @inheritdoc */
