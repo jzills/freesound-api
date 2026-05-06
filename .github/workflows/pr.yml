@@ -1,0 +1,29 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+          cache-dependency-path: lib/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./lib
+        run: npm ci
+
+      - name: Run tests
+        working-directory: ./lib
+        env:
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+        run: npx vitest run
