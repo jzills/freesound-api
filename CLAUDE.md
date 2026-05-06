@@ -8,12 +8,13 @@ All commands run from the `lib/` directory.
 
 ```bash
 cd lib
-npm run build   # Compile to dist/ via Vite (ESM + CJS outputs)
-npm test        # Run tests in watch mode
-npx vitest run  # Run tests once (no watch)
+npm run build            # Compile to dist/ via Vite (ESM + CJS outputs)
+npm test                 # Run unit tests in watch mode
+npm run test:integration # Run integration tests once (requires VITE_API_KEY in lib/.env)
+npx vitest run           # Run all tests once (no watch)
 ```
 
-Tests are integration tests that hit the live Freesound API. The API key is read from `lib/.env` as `VITE_API_KEY`. A 1-second delay between tests is enforced in `test/setup.ts`.
+Unit tests live in `test/unit/` and mock the fetch layer. Integration tests live in `test/integration/` and call the real Freesound API. The API key is read from `lib/.env` as `VITE_API_KEY`. A 1-second delay between tests is enforced in `test/setup.ts`.
 
 ## Architecture
 
@@ -49,4 +50,7 @@ Type declarations are rolled up into `dist/freesound-api.d.ts` via `vite-plugin-
 
 ### Test structure
 
-Tests live in `test/` and are integration tests — they call the real Freesound API. `vitest.config.ts` loads `.env` for the API key and runs tests in a single fork with a 15-second timeout per test.
+- `test/unit/` — unit tests that mock `fetch`; no API key needed
+- `test/integration/` — integration tests that call the real Freesound API; require `VITE_API_KEY` in `lib/.env`
+
+`vitest.config.ts` loads `.env` for the API key and runs tests in a single thread with a 15-second timeout per test. `test/setup.ts` enforces a 1-second delay between tests (needed for rate limiting on integration runs).

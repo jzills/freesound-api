@@ -5,7 +5,8 @@ import { defineConfig } from "vitest/config";
 export default defineConfig(({ mode }) => ({
     test: {
         env: loadEnv(mode, process.cwd(), ""),
-        setupFiles: ["./test/setup.ts"],
+        include: ["test/unit/**/*.test.ts"],
+        setupFiles: ["./test/setup.ts", "./test/unit/setup.ts"],
         pool: "threads",
         poolOptions: {
             threads: {
