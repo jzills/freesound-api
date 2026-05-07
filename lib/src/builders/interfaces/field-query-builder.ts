@@ -173,27 +173,4 @@ export interface IFieldQueryBuilder {
      */
     includeSimilarSounds(): this;
 
-    /**
-     * Include the "analysis" field in the fields list.
-     * @returns {this} The current instance for chaining.
-     */
-    includeAnalysis(): this;
-
-    /**
-     * Include the "analysis_stats" field in the fields list.
-     * @returns {this} The current instance for chaining.
-     */
-    includeAnalysisStats(): this;
-
-    /**
-     * Include the "analysis_frames" field in the fields list.
-     * @returns {this} The current instance for chaining.
-     */
-    includeAnalysisFrames(): this;
-
-    /**
-     * Include the "ac_analysis" field in the fields list.
-     * @returns {this} The current instance for chaining.
-     */
-    includeAcAnalysis(): this;
 }

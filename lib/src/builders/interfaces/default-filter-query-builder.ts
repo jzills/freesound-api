@@ -24,13 +24,6 @@ export interface IDefaultFilterQueryBuilder {
     withCreated(value: string): this;
 
     /**
-     * Filters sounds by their original filename.
-     * @param value - The name of the file.
-     * @returns {this} The current instance for chaining.
-     */
-    withOriginalFilename(value: string): this;
-
-    /**
      * Filters sounds by their textual description.
      * @param value - The description of the sound.
      * @returns {this} The current instance for chaining.
@@ -71,13 +64,6 @@ export interface IDefaultFilterQueryBuilder {
      * @returns {this} The current instance for chaining.
      */
     withPack(value: string): this;
-
-    /**
-     * Filters sounds by their tokenized pack name.
-     * @param value - The tokenized pack name.
-     * @returns {this} The current instance for chaining.
-     */
-    withPackTokenized(value: string): this;
 
     /**
      * Filters sounds by whether they are geotagged.
