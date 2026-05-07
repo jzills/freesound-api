@@ -3,16 +3,16 @@
 	"version": "1.0.6",
 	"keywords": ["api", "audio", "fluent", "freesound", "freesound.org"],
 	"main": "./dist/freesound-api.js",
-	"types": "./dist/freesound-api.d.ts",
+	"types": "./dist/index.d.ts",
 	"type": "module",
 	"exports": {
 		".": {
 			"import": {
-				"types": "./dist/freesound-api.d.ts",
+				"types": "./dist/index.d.ts",
 				"default": "./dist/freesound-api.js"
 			},
 			"require": {
-				"types": "./dist/freesound-api.d.cts",
+				"types": "./dist/index.d.cts",
 				"default": "./dist/freesound-api.cjs"
 			}
 		}
@@ -20,7 +20,7 @@
 	"scripts": {
 		"start": "node dist/index.js",
 		"dev": "vite",
-		"build": "vite build && cp dist/freesound-api.d.ts dist/freesound-api.d.cts",
+		"build": "vite build && cp dist/index.d.ts dist/index.d.cts",
 		"test": "vitest test/unit --watch",
 		"test:integration": "vitest run --config vitest.integration.config.ts"
 	},
