@@ -4,7 +4,6 @@ import FreesoundApi from "../../src/freesound.js";
 import FreesoundRequestBuilder from "../../src/freesound-request-builder.js";
 
 const client = new FreesoundApi(process.env.VITE_API_KEY!);
-console.log(process.env.VITE_API_KEY);
 
 // ─── Tag / License / Type ─────────────────────────────────────────────────────
 
