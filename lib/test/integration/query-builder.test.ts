@@ -1,7 +1,7 @@
 import { assert, test } from "vitest";
 
-import QueryBuilder from "../src/builders/query-builder.js";
-import Freesound from "../src/freesound.js";
+import QueryBuilder from "../../src/builders/query-builder.js";
+import Freesound from "../../src/freesound.js";
 
 const client = new Freesound(process.env.VITE_API_KEY!);
 

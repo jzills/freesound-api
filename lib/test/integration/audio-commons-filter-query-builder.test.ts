@@ -1,7 +1,7 @@
 import { assert, test } from "vitest";
 
-import FreesoundApi from "../src/freesound.js";
-import FreesoundRequestBuilder from "../src/freesound-request-builder.js";
+import FreesoundApi from "../../src/freesound.js";
+import FreesoundRequestBuilder from "../../src/freesound-request-builder.js";
 
 const client = new FreesoundApi(process.env.VITE_API_KEY!);
 
@@ -236,4 +236,3 @@ test("Test_WithSingleEvent_True", async () => {
 
     assert(results.length > 0);
 });
-
