@@ -1,4 +1,5 @@
 import Freesound from "./freesound";
+import { FreesoundError } from "./freesound";
 import QueryBuilder from "./builders/query-builder";
 import SoundDescriptorFilterQueryBuilder from "./builders/sound-descriptor-filter-query-builder";
 import DefaultFilterQueryBuilder from "./builders/default-filter-query-builder";
@@ -9,6 +10,7 @@ export type { SortOption, SimilaritySpace } from "./builders/query-builder";
 
 export {
     Freesound,
+    FreesoundError,
     FreesoundRequestBuilder,
     QueryBuilder,
     SoundDescriptorFilterQueryBuilder,

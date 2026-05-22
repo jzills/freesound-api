@@ -2,6 +2,18 @@ import { FreesoundResponse } from "./types/freesound-response";
 import QueryBuilder from "./builders/query-builder";
 
 /**
+ * Error thrown when the Freesound API returns a non-OK HTTP response.
+ * Preserves the original HTTP status code so callers can distinguish
+ * between e.g. 401 (bad key), 429 (rate limited), and 5xx (server error).
+ */
+export class FreesoundError extends Error {
+    constructor(readonly status: number, message: string) {
+        super(message);
+        this.name = "FreesoundError";
+    }
+}
+
+/**
  * Represents a client for interacting with the Freesound API.
  */
 export default class Freesound {
@@ -27,7 +39,7 @@ export default class Freesound {
      * Searches Freesound for sounds using a text-based query.
      * @param builder - An instance of `QueryBuilder` to construct the query parameters.
      * @returns A promise that resolves to a `FreesoundResponse` object containing the search results.
-     * @throws An error if the API request fails.
+     * @throws A `FreesoundError` containing the HTTP status code if the API request fails.
      */
     searchText = async (builder: QueryBuilder): Promise<FreesoundResponse> => {
         const queryURL = builder.build(this.APIKey);
@@ -35,7 +47,7 @@ export default class Freesound {
         if (response.ok) {
             return response.json();
         } else {
-            throw new Error(await response.text());
+            throw new FreesoundError(response.status, await response.text());
         }
     }
 }
