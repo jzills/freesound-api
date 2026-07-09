@@ -43,7 +43,7 @@ export default class Freesound {
      */
     searchText = async (builder: QueryBuilder): Promise<FreesoundResponse> => {
         const queryURL = builder.build(this.APIKey);
-        const response = await fetch(`${this.URL}/search/text/?${queryURL}`);
+        const response = await fetch(`${this.URL}/search/?${queryURL}`);
         if (response.ok) {
             return response.json();
         } else {
